@@ -4,11 +4,14 @@ import { today } from '@internationalized/date'
 import { convertEventToCalendarEvent, type CalendarEvent, type DeveloperAgendaConference } from '~~/types/events';
 import type { TableColumn } from '@nuxt/ui'
 
-const allEvents = await import('~/assets/all-events.json')
-const conferences: CalendarEvent[] = allEvents.default.map((event: DeveloperAgendaConference) => convertEventToCalendarEvent(event))
+const { data: allEvents } = await useFetch<DeveloperAgendaConference[]>('https://developers.events/all-events.json')
+const conferences = computed<CalendarEvent[]>(() => {
+  if (!allEvents.value) return []
+  return allEvents.value.map(event => convertEventToCalendarEvent(event))
+})
 
 function isConferenceDate(date: DateValue): boolean {
-  return conferences.some(conference => date.compare(conference.startDate) >= 0 && date.compare(conference.endDate) <= 0);
+  return conferences.value.some((conference: CalendarEvent) => date.compare(conference.startDate) >= 0 && date.compare(conference.endDate) <= 0);
 }
 
 const columnVisiblity = {
@@ -58,7 +61,7 @@ const columns: TableColumn<CalendarEvent>[] = [
 const selectedDate = shallowRef(today(getLocalTimeZone()));
 const conferencesForSelectedDate = computed(() => {
   if (!selectedDate.value) return [];
-    return conferences.filter(conference => 
+    return conferences.value.filter((conference: CalendarEvent) => 
     (selectedDate.value.compare(conference.startDate) >= 0 && 
     selectedDate.value.compare(conference.endDate) <= 0)
   );
