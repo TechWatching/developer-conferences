@@ -75,14 +75,24 @@ const conferencesForSelectedDate = computed(() => {
       :links="[{ label: '2025 Calendar', to: '#calendar', size: 'xl' }]" />
     
     <UPageSection id="calendar" title="2025" :description="`${conferences.length} events`">
-      <div class="flex flex-row justify-center space-x-20 scale-150 mt-20">
-        <UCalendar v-model="selectedDate">
-          <template #day="{ day }">
-            <UChip :show="isConferenceDate(day)" size="2xs">
-              {{ day.day }}
-            </UChip>
-          </template>
-        </UCalendar>
+      <div class="flex flex-col md:flex-row justify-center md:space-x-20 space-y-10 md:space-y-0 mt-10 overflow-y-auto">
+        <div class="calendar-wrapper">
+          <UCalendar 
+            v-model="selectedDate" 
+            size="xl"
+            :ui="{ 
+              cellTrigger: 'size-12 text-lg',
+              headCell: 'text-lg py-2',
+              heading: 'text-xl font-bold py-2'
+            }"
+          >
+            <template #day="{ day }">
+              <UChip :show="isConferenceDate(day)" size="xs">
+                {{ day.day }}
+              </UChip>
+            </template>
+          </UCalendar>
+        </div>
         <UTable :data="conferencesForSelectedDate" :columns="columns" :column-visibility="columnVisiblity">
         </UTable>
       </div>
