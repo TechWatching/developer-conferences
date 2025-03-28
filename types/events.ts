@@ -5,6 +5,7 @@ export interface DeveloperAgendaConference {
     date: number[]; // Array of timestamps
     hyperlink: string;
     location: string;
+    country: string;
 }
 
 export interface CalendarEvent {
@@ -13,6 +14,7 @@ export interface CalendarEvent {
     endDate: CalendarDate;
     hyperlink: string;
     location: string;
+    country: string;
 }
 
 export function convertEventToCalendarEvent(event: DeveloperAgendaConference): CalendarEvent {
@@ -23,6 +25,7 @@ export function convertEventToCalendarEvent(event: DeveloperAgendaConference): C
         startDate: new CalendarDate(startDate.year, startDate.month, startDate.day),
         endDate: new CalendarDate(endDate.year, endDate.month, endDate.day),
         hyperlink: event.hyperlink,
-        location: event.location
+        location: event.location,
+        country: event.country
     };
 }

@@ -11,7 +11,9 @@ const conferences = computed<CalendarEvent[]>(() => {
 })
 
 function isConferenceDate(date: DateValue): boolean {
-  return conferences.value.some((conference: CalendarEvent) => date.compare(conference.startDate) >= 0 && date.compare(conference.endDate) <= 0);
+  return conferences.value.some((conference: CalendarEvent) => date.compare(conference.startDate) >= 0 
+    && date.compare(conference.endDate) <= 0 && 
+    (selectedCountries.value.length === 0 || selectedCountries.value.includes(conference.country)));
 }
 
 const columnVisiblity = {
@@ -19,6 +21,7 @@ const columnVisiblity = {
   startDate: false,
   endDate: false,
   location: true,
+  country: false,
 };
 const columns: TableColumn<CalendarEvent>[] = [
   {
@@ -33,6 +36,10 @@ const columns: TableColumn<CalendarEvent>[] = [
   {
     accessorKey: 'location',
     header: 'Location',
+  },
+  {
+    accessorKey: 'country',
+    header: 'Country',
   },
   {
     accessorKey: 'startDate',
@@ -58,12 +65,28 @@ const columns: TableColumn<CalendarEvent>[] = [
   },
 ]
 
+const selectedCountries = ref<string[]>(['France']);
+
+const countries = computed(() => {
+  const uniqueCountries = new Set(
+    conferences.value
+      .map(conf => conf.country)
+      .filter(Boolean)
+  );
+  return Array.from(uniqueCountries).sort();
+});
+
 const selectedDate = shallowRef(today(getLocalTimeZone()));
 const conferencesForSelectedDate = computed(() => {
   if (!selectedDate.value) return [];
-    return conferences.value.filter((conference: CalendarEvent) => 
+  
+  return conferences.value.filter((conference: CalendarEvent) => 
+    // Filter by date
     (selectedDate.value.compare(conference.startDate) >= 0 && 
-    selectedDate.value.compare(conference.endDate) <= 0)
+    selectedDate.value.compare(conference.endDate) <= 0) && 
+    // Filter by countries if any are selected
+    (selectedCountries.value.length === 0 || 
+    selectedCountries.value.includes(conference.country))
   );
 });
 
@@ -72,9 +95,18 @@ const conferencesForSelectedDate = computed(() => {
 <template>
   <UPage>
     <UPageHero title="Developer Conferences Agenda" description="Explore upcoming developer conferences for 2025."
-      :links="[{ label: '2025 Calendar', to: '#calendar', size: 'xl' }]" />
+      :links="[{ label: 'Calendar', to: '#calendar', size: 'xl' }]" />
     
-    <UPageSection id="calendar" title="2025" :description="`${conferences.length} events`">
+    <UPageSection id="calendar" title="Conferences" :description="`${conferences.length} events`">
+      <div class="mt-4 mx-auto">
+        <UInputMenu
+          v-model="selectedCountries"
+          :items="countries"
+          multiple
+          placeholder="Filter by country"
+        />
+      </div>
+
       <div class="flex flex-col md:flex-row justify-center md:space-x-20 space-y-10 md:space-y-0 mt-10 overflow-y-auto">
         <div class="calendar-wrapper">
           <UCalendar 
