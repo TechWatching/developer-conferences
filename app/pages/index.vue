@@ -1,11 +1,42 @@
 <script setup lang="ts">
 import { convertEventToCalendarEvent, type CalendarEvent, type DeveloperAgendaConference } from '~~/types/events';
+import { useLocalStorage } from '@vueuse/core';
 
-const { data: allEvents } = await useFetch<DeveloperAgendaConference[]>('https://developers.events/all-events.json')
-const conferences = computed<CalendarEvent[]>(() => {
-  if (!allEvents.value) return []
-  return allEvents.value.map(event => convertEventToCalendarEvent(event))
-})
+const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+
+const cachedConferences = useLocalStorage<{ data: DeveloperAgendaConference[]; timestamp: number }>('developer-conferences-cachedConferences', {
+  data: [],
+  timestamp: 0
+});
+
+const isCacheValid = computed(() => 
+  cachedConferences.value.data.length > 0 && 
+  (Date.now() - cachedConferences.value.timestamp) < ONE_DAY_MS
+);
+
+const { data: conferencesData } = await useAsyncData<DeveloperAgendaConference[]>(
+  'conferences',
+  async () => {
+    if (isCacheValid.value) {
+      return cachedConferences.value.data;
+    }
+    
+    const developerEvents = await $fetch<DeveloperAgendaConference[]>('https://developers.events/all-events.json');
+    
+    if (developerEvents) {
+      cachedConferences.value = {
+        data: developerEvents,
+        timestamp: Date.now()
+      };
+    }
+    
+    return developerEvents || [];
+  }
+);
+
+const conferences = computed<CalendarEvent[]>(() => 
+  (conferencesData.value || []).map(event => convertEventToCalendarEvent(event))
+);
 </script>
 
 <template>
