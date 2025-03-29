@@ -20,15 +20,14 @@ const description = 'Developer conferences website built with Nuxt.js and Nuxt U
     <UHeader>
       <template #left>
         <span>
-          <UIcon name="ph-microphone-stage-fill" /> Developer Conferences
+          <UIcon name="ph-microphone-stage-fill" class="mr-2" />Developer Conferences
         </span>
       </template>
 
       <template #right>
         <UColorModeButton />
-
         <UButton
-          to="https://github.com/nuxt-ui-pro/starter"
+          to="https://github.com/techwatching/developer-conferences"
           target="_blank"
           icon="i-simple-icons-github"
           aria-label="GitHub"
@@ -53,7 +52,7 @@ const description = 'Developer conferences website built with Nuxt.js and Nuxt U
 
       <template #right>
         <UButton
-          to="https://github.com/nuxt-ui-pro/starter"
+          to="https://github.com/techwatching/developer-conferences"
           target="_blank"
           icon="i-simple-icons-github"
           aria-label="GitHub"

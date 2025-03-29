@@ -42,8 +42,8 @@ const conferences = computed<CalendarEvent[]>(() =>
 <template>
   <UPage>
     <UPageHero
-      title="Developer Conferences Agenda"
-      description="Explore upcoming developer conferences for 2025."
+      title="Developer Conferences"
+      description="Explore previous and upcoming developer conferences from around the world."
       :links="[{ label: 'Calendar', to: '#calendar', size: 'xl' }]" />
     
     <UPageSection id="calendar" title="Conferences" :description="`${conferences.length} events`">
@@ -52,24 +52,24 @@ const conferences = computed<CalendarEvent[]>(() =>
     
     <UPageSection>
       <UPageCTA title="Resources & Inspiration"
-        description="This project is based on the data available on the developers-conferences-agenda GitHub repository and inspired from the developers.events website. Check them and give the repository a star."
+        description="This website uses the data made available by the developers-conferences-agenda GitHub repository which is an amazing project that you should definitely check. Give it a start, contribute with your events, and talk about it. This website is also inspired by the developers.events website."
         variant="subtle" 
         :links="[
           {
-            label: 'Original Website',
-            to: 'https://developers.events/#/2025/calendar',
-            target: '_blank',
-            icon: 'i-ph-globe-light',
-            color: 'neutral'
-          },
-          {
-            label: 'GitHub',
+            label: 'Developers Conferences Agenda',
             to: 'https://github.com/scraly/developers-conferences-agenda',
             target: '_blank',
             trailingIcon: 'i-simple-icons-github',
             color: 'neutral',
             variant: 'subtle'
-          }
+          },
+          {
+            label: 'Developer Events',
+            to: 'https://developers.events/#/2025/calendar',
+            target: '_blank',
+            icon: 'i-ph-globe-light',
+            color: 'neutral'
+          },
         ]" />
     </UPageSection>
   </UPage>
