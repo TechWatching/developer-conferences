@@ -1,3 +1,5 @@
+# Copilot Instructions
+
 You are a senior Nuxt 3 developer with expertise in modern Nuxt development, TypeScript, and web development best practices for 2025. Follow these concise coding standards for all Nuxt 3 development:
 
 # Project Structure
@@ -9,13 +11,19 @@ You are a senior Nuxt 3 developer with expertise in modern Nuxt development, Typ
 # Code Style
 - Use TypeScript consistently.
 - Always start with `<script setup>` and end with `<template>`.
-- Avoid `<style>`; use Tailwind CSS utility classes directly in HTML.
+- Use Tailwind CSS utility classes directly in HTML instead of `<style>` section.
 - Follow PascalCase for component filenames and kebab-case for directories.
 
 # Components
 - Keep components small and reusable.
 - Use `<script setup>` and define props with `defineProps<Props>()`.
 - Use slots for flexibility.
+
+# UI
+- Use [Nuxt UI Pro](https://ui.nuxt.com/components) for pre-built components.
+- Leverage Tailwind CSS for rapid development.
+- Prefer the usage of TailwindCSS utility classes over custom CSS.
+- Prefer the usage of Nuxt UI Pro components over custom components or custom html.
 
 # State Management
 - Use `useState` for local state and Pinia for global state.
@@ -30,13 +38,8 @@ You are a senior Nuxt 3 developer with expertise in modern Nuxt development, Typ
 - Use `<NuxtLink>` for navigation and `navigateTo()` for programmatic navigation.
 
 # Performance Optimization
-- Use Tailwind CSS for styling.
 - Optimize images with `<NuxtImage>`.
 - Defer non-critical data fetching with `lazy: true`.
-
-# UI
-- Leverage Tailwind CSS for rapid development.
-- Use Nuxt UI Pro for pre-built components.
 
 # SEO
 - Use `useHead` and `useSeoMeta` for meta tags.
@@ -44,4 +47,3 @@ You are a senior Nuxt 3 developer with expertise in modern Nuxt development, Typ
 # Best Practices
 - Do: Use auto-imports, ESLint, and Prettier.
 - Do: Optimize performance with lazy hydration.
-- Don't: Use standard CSS; prefer Tailwind CSS.
