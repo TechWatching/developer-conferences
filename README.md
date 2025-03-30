@@ -1,85 +1,73 @@
-![nuxt-ui-minimal-starter-social-card](https://github.com/nuxt-ui-pro/starter/assets/739984/2ab2f391-718f-4188-95db-20b8768bbf9d)
+# Developer Conferences
 
-# Nuxt UI Pro - Starter
+A modern Nuxt 3 application that allows users to explore developer conferences from around the world.
 
-This starter lets you get started with [Nuxt UI Pro](https://ui.nuxt.com/pro) quickly.
+This project is based on the amazing open source project [Developer Conferences Agenda](https://github.com/scraly/developers-conferences-agenda) by [Aurélie Vache](https://github.com/scraly) that lists in a GitHub repository all the developer conferences and CFPs in the world. This Nuxt application completely relies on the data provided by the [Developer Conferences Agenda](https://github.com/scraly/developers-conferences-agenda) repository and is not meant to be a replacement for it, nor a replacement for its website [developers.events](https://developers.events) that provides a nice way to explore the conferences.
 
-[![Nuxt UI Pro](https://img.shields.io/badge/Made%20with-Nuxt%20UI%20Pro-00DC82?logo=nuxt.js&labelColor=020420)](https://ui.nuxt.com/pro)
+This project is a personal initiative to learn and experiment with GitHub Copilot Agent Mode to create a simple website using Nuxt. I happened to choose to test GitHub Copilot Agent Mode to develop a small website that lists developer conferences, using the data publicly made available by the Developer Conferences Agenda project.
 
-- [Live demo](https://ui-pro-starter.nuxt.dev)
-- [Play on Stackblitz](https://stackblitz.com/github/nuxt-ui-pro/starter)
-- [Documentation](https://ui.nuxt.com/pro/getting-started)
+This project is not affiliated with the original project or its maintainers, but I encourage you to check their [repository](https://github.com/scraly/developers-conferences-agenda) and show your support with a star.
 
-[![Deploy to NuxtHub](https://hub.nuxt.com/button.svg)](https://hub.nuxt.com/new?repo=nuxt-ui-pro/starter)
+## Features
 
-## Setup
+- 📆 Interactive calendar view of developer conferences
+- 🌍 Filter conferences by country
+- 🔗 Direct links to conference websites
 
-Make sure to install the dependencies:
+## Tech Stack
+
+- [Nuxt 3](https://nuxt.com) - The Vue framework for building modern web applications
+- [TypeScript](https://www.typescriptlang.org/) - Strongly typed JavaScript
+- [Nuxt UI Pro](https://ui.nuxt.com/pro) - Premium UI components for Nuxt
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [Internationalized Date](https://github.com/adobe/react-spectrum/tree/main/packages/%40internationalized/date) - Date utilities with internationalization support
+
+## Data Source
+
+All the data used in this application comes from this project and is retrieved from the [developers.events](https://developers.events) website that makes publicly available JSON files with all the conferences and CFPs of the [Developer Conferences Agenda](https://github.com/scraly/developers-conferences-agenda) project.
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v18.x or newer)
+- pnpm (recommended) or npm
+
+### Installation
 
 ```bash
-# npm
-npm install
+# Clone the repository
+git clone https://github.com/your-username/developer-conferences.git
+cd developer-conferences
 
-# pnpm
+# Install dependencies
 pnpm install
 
-# yarn
-yarn install
-
-# bun
-bun install
+# Set up environment variables
+cp .env.example .env
+# Add your Nuxt UI Pro license if you have one
 ```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
+### Development
 
 ```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
+# Start the development server
+pnpm dev
 ```
 
-## Production
+Navigate to [http://localhost:3000](http://localhost:3000) to see the application running.
 
-Build the application for production:
+## Data Source
 
-```bash
-# npm
-npm run build
+This application uses data from:
+- [developers.events](https://developers.events) - Provides the conference data via API
+- [Developers Conferences Agenda](https://github.com/scraly/developers-conferences-agenda) - Original data source
 
-# pnpm
-pnpm run build
+## License
 
-# yarn
-yarn build
+MIT
 
-# bun
-bun run build
-```
+## Acknowledgments
 
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+- This project was inspired by [developers.events](https://developers.events)
+- Thanks to the [Developers Conferences Agenda](https://github.com/scraly/developers-conferences-agenda) repository for providing the conference data
