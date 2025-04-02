@@ -5,6 +5,9 @@ on:
     branches:
       - main
   workflow_dispatch:
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
   build-and-deploy:
@@ -16,8 +19,6 @@ jobs:
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 10
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -31,12 +32,37 @@ jobs:
       - name: Build Nuxt site
         run: pnpm build
         env:
-          NITRO_PRESET: static
+          NUXT_UI_PRO_LICENSE: ${{ secrets.NUXT_UI_PRO_LICENSE }}
+          NITRO_PRESET: static # Use the static preset for Nuxt 3 to generate static files
+
+      - name: Install infra dependencies
+        run: pnpm install --dir infra
+
+      - uses: pulumi/auth-actions@v1
+        with:
+          organization: TechWatching
+          requested-token-type: urn:pulumi:token-type:access_token:personal
+          scope: user:TechWatching
+
+      - uses: pulumi/actions@v6
+        with:
+          command: up
+          stack-name: techwatching/developer-conferences/prod
+          work-dir: infra
+
+      # Securely get the deployment token from Pulumi outputs
+      - name: Get Static Web App Deployment Token
+        id: get-token
+        run: |
+          # Use Pulumi CLI to get the token and mask it in logs
+          TOKEN=$(cd infra && pulumi stack output staticWebAppDeploymentToken --show-secrets)
+          echo "::add-mask::$TOKEN"
+          echo "deployment_token=$TOKEN" >> $GITHUB_OUTPUT
 
       - name: Deploy to Azure Static Web App
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APP_DEPLOYMENT_TOKEN }}
+          azure_static_web_apps_api_token: ${{ steps.get-token.outputs.deployment_token }}
           action: "upload"
           app_location: ".output/public" # The location of the Nuxt generated static files
           skip_app_build: true # We've already built the app
