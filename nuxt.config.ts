@@ -6,13 +6,13 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxt/icon'
   ],
+  ssr: false,
 
   devtools: {
     enabled: true
   },
 
   css: ['~/assets/css/main.css'],
-  ssr: false,
 
   routeRules: {
     '/': { prerender: true }

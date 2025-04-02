@@ -10,9 +10,6 @@ useHead({
     lang: 'en'
   }
 })
-
-const title = 'Developer Conferences website'
-const description = 'Developer conferences website built with Nuxt.js and Nuxt UI Pro'
 </script>
 
 <template>
@@ -20,7 +17,10 @@ const description = 'Developer conferences website built with Nuxt.js and Nuxt U
     <UHeader>
       <template #left>
         <span>
-          <UIcon name="ph-microphone-stage-fill" class="mr-2" />Developer Conferences
+          <UIcon
+            name="ph-microphone-stage-fill"
+            class="mr-2"
+          />Developer Conferences
         </span>
       </template>
 
