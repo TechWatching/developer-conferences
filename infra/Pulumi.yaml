@@ -1,0 +1,21 @@
+name: developer-conferences
+description: The infrastructure for the Developer Conferences website
+runtime:
+  name: nodejs
+  options:
+    packagemanager: pnpm
+config:
+  pulumi:autonaming:
+      value:
+        pattern: ${name}-${stack}-${hex(8)}
+        providers:
+          azure-native:
+            resources:
+              "azure-native:resources:ResourceGroup": 
+                pattern: rg-${name}-${stack}-${hex(8)}
+              "azure-native:web:StaticSite":
+                pattern: stapp-${name}-${stack}-${hex(8)}
+
+  pulumi:tags:
+    value:
+      pulumi:template: typescript

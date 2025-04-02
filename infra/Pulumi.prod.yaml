@@ -1,0 +1,4 @@
+environment:
+  - developer-conferences/prod
+config:
+  azure-native:location: westeurope
