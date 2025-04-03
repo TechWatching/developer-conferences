@@ -2,17 +2,19 @@
 
 A modern Nuxt 3 application that allows users to explore developer conferences from around the world.
 
-This project is based on the amazing open source project [Developer Conferences Agenda](https://github.com/scraly/developers-conferences-agenda) by [Aurélie Vache](https://github.com/scraly) that lists in a GitHub repository all the developer conferences and CFPs in the world. This Nuxt application completely relies on the data provided by the [Developer Conferences Agenda](https://github.com/scraly/developers-conferences-agenda) repository and is not meant to be a replacement for it, nor a replacement for its website [developers.events](https://developers.events) that provides a nice way to explore the conferences.
-
-This project is a personal initiative to learn and experiment with GitHub Copilot Agent Mode to create a simple website using Nuxt. I happened to choose to test GitHub Copilot Agent Mode to develop a small website that lists developer conferences, using the data publicly made available by the Developer Conferences Agenda project.
-
-This project is not affiliated with the original project or its maintainers, but I encourage you to check their [repository](https://github.com/scraly/developers-conferences-agenda) and show your support with a star.
-
 ## Features
 
 - 📆 Interactive calendar view of developer conferences
 - 🌍 Filter conferences by country
 - 🔗 Direct links to conference websites
+
+## Acknowledgments
+
+This project is based on the amazing open source project [Developer Conferences Agenda](https://github.com/scraly/developers-conferences-agenda) by [Aurélie Vache](https://github.com/scraly) that lists in a GitHub repository all the developer conferences and CFPs in the world. This Nuxt application completely relies on the data provided by the [Developer Conferences Agenda](https://github.com/scraly/developers-conferences-agenda) repository and is not meant to be a replacement for it, nor a replacement for its website [developers.events](https://developers.events) that provides a nice way to explore the conferences around the world.
+
+This project is a personal initiative to learn and experiment with GitHub Copilot Agent Mode to create a simple website using Nuxt. For this experiment, I decided to build a small website that lists developer conferences, using data made publicly available by the Developer Conferences Agenda project.
+
+This project is not affiliated with the original project or its maintainers, but I encourage you to check their [repository](https://github.com/scraly/developers-conferences-agenda) and show your support with a star.
 
 ## Tech Stack
 
@@ -21,6 +23,12 @@ This project is not affiliated with the original project or its maintainers, but
 - [Nuxt UI Pro](https://ui.nuxt.com/pro) - Premium UI components for Nuxt
 - [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
 - [Internationalized Date](https://github.com/adobe/react-spectrum/tree/main/packages/%40internationalized/date) - Date utilities with internationalization support
+
+## Deployment and Hosting
+
+This website is hosted on an [Azure Static Web App](https://learn.microsoft.com/en-us/azure/static-web-apps?wt.mc_id=MVP_430820).
+The Azure resources are provisioned using [Pulumi](https://www.pulumi.com/) with TypeScript and the [Azure Native provider](https://www.pulumi.com/registry/packages/azure-native/).
+The repository contains a GitHub Actions workflow that automatically provision the Azure infrastructure and deploys the application to Azure Static Web Apps.
 
 ## Data Source
 
@@ -66,8 +74,3 @@ This application uses data from:
 ## License
 
 MIT
-
-## Acknowledgments
-
-- This project was inspired by [developers.events](https://developers.events)
-- Thanks to the [Developers Conferences Agenda](https://github.com/scraly/developers-conferences-agenda) repository for providing the conference data
